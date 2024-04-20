@@ -1,0 +1,26 @@
+syntax = "proto3"; 
+
+message CommentRequest { 
+    string text = 1;
+} 
+
+message CommentResult { 
+    string text = 1; 
+    string label = 2; 
+    repeated float sentiment = 3;
+
+}
+
+message CommentsListRequest { 
+    repeated CommentRequest list = 1;
+}
+
+message CommentsListResult { 
+    repeated CommentResult list = 1;
+}
+
+service CommentsPrediction { 
+    rpc predict(CommentsListRequest) returns (CommentsListResult);
+}
+
+message Empty{}
