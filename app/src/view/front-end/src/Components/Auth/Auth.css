@@ -1,0 +1,58 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 200px;
+    background: #e8ff63;
+    padding-bottom: 30px;
+    width: 700px;
+}
+
+
+.header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    margin-top: 30px;
+}
+
+.InsText{
+    width: 400px;
+    margin-top: 30px;
+}
+
+.text{
+    display: flex;
+    color: #d21f3c;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+
+.underline{
+    width: 181px;
+    height: 6px;
+    background: #d21f3c;
+    border-radius: 9px;
+}
+
+
+.signInButton{
+    padding-top: 15px;
+    margin-left: 260px;
+}
+
+
+.gray{
+        background: #eaeaea;
+        color: #676767;
+}
+
+
+.ReturnHome{
+    display: flex;
+    margin-right: 600px;
+}
+
+

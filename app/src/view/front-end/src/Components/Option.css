@@ -1,0 +1,31 @@
+.All{
+    display: flex;
+    margin: auto;
+    background-color: coral;
+    color:aliceblue;
+    border-radius: 50px;
+    width: 800px;
+    font-size: 50px;
+    height: 100px;
+    text-align: ceter;
+    justify-content: center;
+    margin-top: 175px;
+}
+
+
+.One{
+    display: flex;
+    margin: auto;
+    background-color:cadetblue;
+    color:black;
+    border-radius: 50px;
+    width: 800px;
+    font-size: 50px;
+    height: 100px;
+    text-align: ceter;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+
+

@@ -1,0 +1,28 @@
+.container-fluid{
+    display: flex;
+    margin: auto;
+    margin-top: 100px;
+    width: 2000px; 
+    justify-content: center;
+}
+
+.ReturnBack1{
+    display: flex;
+    width: 150px;
+    justify-content: center;
+    background-color: beige;
+    border-radius: 15px;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+.Status1{
+    display: flex;
+    position: absolute;
+    right: 0;
+    margin-right: 100px;
+    width: 150px;
+    justify-content: center;
+    background-color: lightgreen;
+    border-radius: 15px;
+}
