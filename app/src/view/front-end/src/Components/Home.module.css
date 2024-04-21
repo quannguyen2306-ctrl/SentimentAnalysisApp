@@ -3,10 +3,6 @@
     min-height: 100vh;
 }
 
-.container {
-    padding: 8rem;
-}
-
 .container h1 {
     font-family: var(--serif);
     color: var(--main);
@@ -34,8 +30,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 8rem;
 }
 
 .pictonamu {
-    width: 30%;
+    width: 50%;
 }
