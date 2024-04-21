@@ -25,20 +25,7 @@ function Result1()
 
     return(
         <div className='Container'>
-            <div className="ReturnBack1"><Link to ="/Option">Return to last page</Link></div>
-            <div className="Status1">Status: Logged In</div>
-            <React.Fragment>
-                <div className='container-fluid mb-3'>
                     <Chart
-
-
-                        /*const videoData = {
-                            { value: 30, title: 'Video title 1' },
-                            { value: 40, title: 'Video title 2' },
-                            { value: 35, title: 'Video title 3' }                
-                        };*/
-
-
                         type='bar'
                         width={1600}
                         height={560}
@@ -92,25 +79,11 @@ function Result1()
                                 },
                                 categories: videotitle,
                             },
-
-
-
-                        
-
-
-
-
                         }}
-
-
-                
-                    
                     />
                 </div>
-            </React.Fragment>
-        </div>
-
-
+        //     </React.Fragment>
+        // </div>
     );
 }
 

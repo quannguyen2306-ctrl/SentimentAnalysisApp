@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 
 const clientId = "561826027643-4limjsvo3q2nv8e8r94n9tlmn8b0vcf9.apps.googleusercontent.com";
-const flag = false
+let flag = false
 
 
 const Auth = () => {

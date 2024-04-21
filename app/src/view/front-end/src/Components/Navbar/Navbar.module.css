@@ -1,0 +1,30 @@
+.container {
+    --padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--padding);
+
+    background-color: var(--background);
+
+    border-bottom: 1px solid var(--border);
+}
+
+.navbarChildren {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.ctaButton {
+    padding: 15px 35px;
+    font-weight: 500;
+    background-color: var(--cta);
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.ctaButton:hover {
+    box-shadow: 5px 5px var(--main);
+}

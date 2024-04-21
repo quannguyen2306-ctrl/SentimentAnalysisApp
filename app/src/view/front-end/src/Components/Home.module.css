@@ -1,0 +1,41 @@
+.main {
+    background-color: var(--background);
+    min-height: 100vh;
+}
+
+.container {
+    padding: 8rem;
+}
+
+.container h1 {
+    font-family: var(--serif);
+    color: var(--main);
+    font-size: 2.7rem;
+}
+
+.container h4 {
+    font-weight: 500;
+    font-size: 1.3rem;
+}
+
+.ctaButton {
+    padding: 15px 35px;
+    font-weight: 500;
+    background-color: var(--cta);
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.ctaButton:hover {
+    box-shadow: 5px 5px var(--main);
+}
+
+.flexDivider {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pictonamu {
+    width: 30%;
+}
