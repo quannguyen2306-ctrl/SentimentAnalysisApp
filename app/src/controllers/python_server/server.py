@@ -7,6 +7,8 @@ from predict import predict_sentiment
 class CommentPrediction(comment_list_pb2_grpc.CommentsPredictionServicer): 
     def predict(self, request, context):
         predictions = predict_sentiment(request.list)
+        print("testing")
+        print(predictions)
         return comment_list_pb2.CommentsResult(result = predictions)
     
 def serve(): 

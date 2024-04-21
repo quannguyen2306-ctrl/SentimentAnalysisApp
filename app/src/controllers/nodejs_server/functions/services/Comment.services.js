@@ -1,7 +1,7 @@
 class CommentInteractor {
     constructor(video_url) {
         this.videoId = this._extractVideoId(video_url);
-        this.apiKey = "AIzaSyBV9j-2DheWwvUkvBgu80SwizV6UEjr274";
+        this.apiKey = process.env.API_KEY;
         console.log(this.apiKey)
         this.url = 'https://www.googleapis.com/youtube/v3/commentThreads';
         this.allComments = [];

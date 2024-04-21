@@ -2,7 +2,7 @@ import express from 'express';
 import grpc from '@grpc/grpc-js';
 import protoLoader from '@grpc/proto-loader';
 import bodyParser from 'body-parser';
-
+import dotenv from 'dotenv'; dotenv.config()
 import Comment from "./services/Comment.services.js";
 import Video from "./services/Video.services.js";
 
@@ -37,6 +37,7 @@ app.get('/predict', async (req, res) => {
     const commentsListRequest = await commentClass.getComments();
     try {
         const predictions = await predictComments({ list: commentsListRequest });
+        console.log("raw", predictions)
         const exp = 3;
         const dp = Math.pow(10,exp);
         for (let key in predictions) {

@@ -2,7 +2,7 @@ class YouTubeVideo {
     constructor(videoUrl) {
         this.videoUrl = videoUrl;
         this.videoId = this._extractVideoId(videoUrl);
-        this.apiKey = "AIzaSyBV9j-2DheWwvUkvBgu80SwizV6UEjr274";
+        this.apiKey = process.env.API_KEY;
     }
 
     _extractVideoId(videoUrl) {

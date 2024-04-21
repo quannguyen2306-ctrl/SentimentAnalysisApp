@@ -1,13 +1,13 @@
-syntax = "proto3"; 
+syntax = "proto2"; 
 
 message CommentRequest { 
-    string text = 1;
+    required string text = 1;
 } 
 
 message AverageCommentResult { 
-    float POS = 1; 
-    float NEG = 2; 
-    float NEU = 3; 
+    required float POS = 1 [default = 0.0]; 
+    required float NEG = 2 [default = 0.0]; 
+    required float NEU = 3 [default = 0.0]; 
 }
 
 message CommentsListRequest { 
@@ -15,7 +15,7 @@ message CommentsListRequest {
 }
 
 message CommentsResult { 
-    AverageCommentResult result = 1; 
+   required AverageCommentResult result = 1; 
 }
 
 service CommentsPrediction { 
