@@ -7,19 +7,7 @@ from predict import predict_sentiment
 class CommentPrediction(comment_list_pb2_grpc.CommentsPredictionServicer): 
     def predict(self, request, context):
         predictions = predict_sentiment(request.list)
-        for i in predictions: 
-            print(i.keys())
-        results = [
-            comment_list_pb2.CommentResult(
-                text=comment.text,
-                label=prediction['label'],
-                sentiment=prediction['sentiment']
-            )
-            for comment, prediction in zip(request.list, predictions)
-        ]
-
-        print(results)
-        return comment_list_pb2.CommentsListResult(list = results)
+        return comment_list_pb2.CommentsResult(result = predictions)
     
 def serve(): 
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
@@ -31,4 +19,7 @@ def serve():
 
 if __name__ == "__main__": 
     serve()
+
+# python -m grpc_tools.protoc -I=<directory_of_proto_file> --python_out=<output_directory> --grpc_python_out=<output_directory> <your_proto_file>.proto
+# python -m grpc_tools.protoc -I=proto --python_out=python_server --grpc_python_out=python_server comment_list.proto
 

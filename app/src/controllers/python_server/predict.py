@@ -10,7 +10,12 @@ tokenizer = AutoTokenizer.from_pretrained(model_name)
 def predict_sentiment(data): 
 # Define the labels
     labels = ['NEG', 'POS', 'NEU']
-    result = []
+    result = { 
+        'POS': 0, 
+        'NEG': 0, 
+        'NEU': 0
+    }
+    n = len(data)
 
     with torch.no_grad(): 
         for comment in data: 
@@ -21,13 +26,10 @@ def predict_sentiment(data):
             output = model(**inputs)
             # Get the probabilities
             probabilities = torch.softmax(output.logits, dim=1).tolist()[0]
-            # Map probabilities to labels
-            prediction_format = {'sentiment': probabilities}
-            prediction_format['text'] = text
             prob_indexed = enumerate(probabilities)
-            max_index, max_value = max(prob_indexed, key=lambda x: x[1])
-            prediction_format['label'] = labels[max_index]
-            result.append(prediction_format)
+            max_index, _ = max(prob_indexed, key=lambda x: x[1])
+            prob_label = labels[max_index]
+            result[prob_label] += 1/n
 
     return result
 

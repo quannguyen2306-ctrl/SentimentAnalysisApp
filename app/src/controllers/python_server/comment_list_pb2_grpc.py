@@ -17,7 +17,7 @@ class CommentsPredictionStub(object):
         self.predict = channel.unary_unary(
                 '/CommentsPrediction/predict',
                 request_serializer=comment__list__pb2.CommentsListRequest.SerializeToString,
-                response_deserializer=comment__list__pb2.CommentsListResult.FromString,
+                response_deserializer=comment__list__pb2.CommentsResult.FromString,
                 )
 
 
@@ -36,7 +36,7 @@ def add_CommentsPredictionServicer_to_server(servicer, server):
             'predict': grpc.unary_unary_rpc_method_handler(
                     servicer.predict,
                     request_deserializer=comment__list__pb2.CommentsListRequest.FromString,
-                    response_serializer=comment__list__pb2.CommentsListResult.SerializeToString,
+                    response_serializer=comment__list__pb2.CommentsResult.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -61,6 +61,6 @@ class CommentsPrediction(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/CommentsPrediction/predict',
             comment__list__pb2.CommentsListRequest.SerializeToString,
-            comment__list__pb2.CommentsListResult.FromString,
+            comment__list__pb2.CommentsResult.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
