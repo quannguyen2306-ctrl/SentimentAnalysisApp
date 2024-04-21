@@ -1,11 +1,24 @@
 import Chart from "react-apexcharts"
 import styles from './ChartSental.module.css'
 import useWindowDimensions from '../../Hooks/useWindowDimensions'
-  
-export default function ChartSental() {
-    const videotitle = ['Video title 1', 'Video title 2', 'Video title 3']
-    
+import { useEffect } from "react";
+
+export default function ChartSental({ predictions }) {
+    const videotitle = predictions.map(item => item.title)
+
     const { height, width } = useWindowDimensions();
+    const seriesData = predictions.map(dataPoint => [
+        dataPoint.predictions.POS,
+        dataPoint.predictions.NEU,
+        dataPoint.predictions.NEG
+    ]);
+    useEffect(() => {
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
+    }, [])
+
     return (
         <div className={styles.container}>
             <Chart
@@ -14,24 +27,24 @@ export default function ChartSental() {
                 height={560}
                 series={[
                     {
-                        name: "Negative",
-                        data: [0.45, 0.4, 0.5],
-                        color: "rgba(200,0,0)",
+                        name: "Positive",
+                        data: seriesData.map(data => data[0]),
+                        color: "rgb(42, 185, 61)"
                     },
                     {
                         name: "Neutral",
-                        data: [0.125, 0.178, 0.38],
-                        color: "rgba(200,200,0)",
+                        data: seriesData.map(data => data[1]),
+                        color: "rgb(214, 202, 27)",
                     },
                     {
-                        name: "Positive",
-                        data: [0.4, 0.4, 0.11],
-                        color: "rgba(50,200,0)"
-                    }
+                        name: "Negative",
+                        data: seriesData.map(data => data[2]),
+                        color: "rgb(197, 40, 40)",
+                    },
                 ]}
 
                 options={{
-                  
+
                     chart: {
                         stacked: true,
                     },

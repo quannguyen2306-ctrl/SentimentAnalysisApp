@@ -137,3 +137,9 @@
 .ctaButton:hover {
     box-shadow: 5px 5px var(--main);
 }
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

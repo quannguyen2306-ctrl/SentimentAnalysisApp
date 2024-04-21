@@ -2,16 +2,24 @@ import express from 'express';
 import grpc from '@grpc/grpc-js';
 import protoLoader from '@grpc/proto-loader';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import dotenv from 'dotenv'; dotenv.config()
 import Comment from "./services/Comment.services.js";
 import Video from "./services/Video.services.js";
 
 const app = express();
+const corsOptions = {
+    origin: '*', // Replace with client's URL
+    credentials: true,
+    optionsSuccessStatus: 204,
+};
+
 app.use(bodyParser.json());
+app.use(cors(corsOptions))
 
 // Load gRPC protobuf definition
 const PORT = process.env.PORT || 8000;
-const PROTO_PATH = "/Users/nguyenhoangquan/Documents/gate_sental/SENTAL/sental_app/app/src/controllers/proto/comment_list.proto";
+const PROTO_PATH = "../../proto/comment_list.proto";
 const packageDefinition = protoLoader.loadSync(PROTO_PATH);
 const { CommentsPrediction } = grpc.loadPackageDefinition(packageDefinition);
 
@@ -39,7 +47,7 @@ app.get('/predict', async (req, res) => {
         const predictions = await predictComments({ list: commentsListRequest });
         console.log("raw", predictions)
         const exp = 3;
-        const dp = Math.pow(10,exp);
+        const dp = Math.pow(10, exp);
         for (let key in predictions) {
             predictions[key] = Math.round(predictions[key] * dp) / dp; // round to <dp> decimal places
         }
@@ -53,9 +61,9 @@ app.get('/predict', async (req, res) => {
     }
 })
 
-app.get('/video', async (req, res) => { 
-    const link = req.query.link 
-    const video = new Video(link); 
+app.get('/video', async (req, res) => {
+    const link = req.query.link
+    const video = new Video(link);
     video.getInfo()
         .then(videoInfo => {
             console.log('Title:', videoInfo.title);

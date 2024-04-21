@@ -1,31 +1,56 @@
 import styles from './Dashboard.module.css'
 import Navbar from '../Navbar/Navbar'
+import { Audio } from 'react-loader-spinner'
 
 import { useState } from 'react'
+import axios from 'axios'
 import ChartSental from './ChartSental'
 
 export default function Dashboard() {
     const [value, setValue] = useState('')
     const [name, setName] = useState('')
-
     const [list, setList] = useState([])
+    const [predictions, setPredictions] = useState([])
+    const [loading, setLoading] = useState(false)
 
-    function add() {
-        console.log(value)
+    async function add() {
         if (value.length !== 0) {
-            // get title, author and thumbnail and setList
-            setList(prev => [...prev, {
-                title: value,
-                author: 'Mr.Beast',
-                thumbnail: 'https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg'
-            }])
+            try {
+                const response = await axios.get(`http://localhost:8000/video?link=${value}`);
+                const res = response.data
+                setList(prev => [...prev, {
+                    title: res.title,
+                    author: res.author,
+                    thumbnail: res.thumbnail,
+                    link: value
+                }])
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
             setValue('')
         }
     }
 
-    function sental() {
+    async function sental() {
         if (list.length !== 0) {
-            // send analysis
+            setLoading(true)
+            try {
+                const fetchedResults = [];
+                for (const item of list) {
+                    const response = await axios.get(`http://localhost:8000/predict?link=${item.link}`);
+                    fetchedResults.push({
+                        predictions: response.data.predictions,
+                        title: item.title,
+                        author: item.author,
+                        thumbnail: item.thumbnail,
+                        link: item.link
+                    });
+                }
+                setPredictions(fetchedResults)
+                setLoading(false)
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
         }
     }
 
@@ -66,7 +91,7 @@ export default function Dashboard() {
                                 <img src={item.thumbnail} alt={item.title} loading='lazy' />
                                 <div>
                                     <p>{item.title}</p>
-                                    <p>{item.author}</p>
+                                    <p>From - {item.author}</p>
                                 </div>
                             </div>
                         ))}
@@ -74,12 +99,22 @@ export default function Dashboard() {
                 </div>
 
                 <div className={styles.divider}></div>
-                {name.length !== 0 ?
+                {predictions.length !== 0 ?
                     <>
-                        <h1>Semantic analysis for {name}</h1>
-                        <ChartSental />
-                    </> : null
+                        <h1>Semantic analysis</h1>
+                        <ChartSental predictions={predictions} />
+                    </> :
+                    null
                 }
+                {loading === true ? <div className={styles.center}><Audio
+                    height="50"
+                    width="50"
+                    radius="9"
+                    color="#FFE01B"
+                    ariaLabel="three-dots-loading"
+                    wrapperStyle
+                    wrapperClass
+                /></div> : null}
             </div>
         </div>
     )

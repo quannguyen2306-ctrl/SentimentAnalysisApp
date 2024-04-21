@@ -2,11 +2,8 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import Auth from './Components/Auth/Auth'
 import Home from './Components/Home'
-import Result1 from './Components/Results/Result1'
-import Result2 from './Components/Results/Result2';
-
 import Dashboard from './Components/Dashboard/Dashboard';
-import Option from './Components/Option'
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 // import { googleLogout, useGoogleLogin, GoogleLoginButton  } from '@react-oauth/google';
 
@@ -17,8 +14,7 @@ function App() {
         const fetchProfile = async () => {
             if (user) {
                 try {
-                    console.log('called')
-                    await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
+                    await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
                         headers: {
                             Authorization: `Bearer ${user.access_token}`,
                             Accept: 'application/json'
@@ -37,8 +33,6 @@ function App() {
 
         fetchProfile();
     }, [user]);
-
-    console.log(user)
 
     return (
 
