@@ -106,7 +106,9 @@ export default function Dashboard() {
                     </> :
                     null
                 }
-                {loading === true ? <div className={styles.center}><Audio
+                {loading === true ? <div className={styles.center}>
+                    <h1>Get ready to be sental wayyy</h1>
+                    <Audio
                     height="50"
                     width="50"
                     radius="9"
